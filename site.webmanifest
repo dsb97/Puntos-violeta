@@ -1,0 +1,22 @@
+{
+    "name": "JSP Puntos violeta",
+    "short_name": "Puntos violeta",
+    "description": "PWA que muestra los puntos violeta de Puertollano.",
+    "icons": [
+      {
+        "src": "favicon.png",
+        "sizes": "32x32",
+        "type": "image/png"
+      },
+      {
+        "src": "favicon.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ],
+    "start_url": "index.html",
+    "display": "fullscreen",
+    "theme_color": "#6f30a0",
+    "background_color": "#6f30a0"
+  }
+  
