@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordenar Ubicaciones</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <h1>Ordenar Ubicaciones por Distancia</h1>
+    <div id="spinner">Cargando...</div>
+    <ul id="ubicacionesOrdenadas"></ul>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            obtenerUbicacion();
+        });
+        let arrayPuntosVioleta = [
+            {
+                nombre: 'Café Macondo',
+                latitud: 38.68761839415915,
+                longitud: -4.111456155876317,
+                placeID: 'ChIJVzZ8lF-Maw0RBfd4UEC063Y'
+            },
+            {
+                nombre: 'Díaz Floristas Estrella',
+                latitud: 38.68708676870443,
+                longitud: -4.109657827032374,
+                placeID: 'ChIJGw4xQ_WMaw0RHCy6WS26NBM'
+            },
+            {
+                nombre: 'Multicines Ortega',
+                latitud: 38.684895697752786,
+                longitud: -4.110819115382186,
+                placeID: 'ChIJg2OaHmCMaw0R5pFofIMA1Ho'
+            },
+            {
+                nombre: 'Pizzería Bohemios',
+                latitud: 38.689960731725385,
+                longitud: -4.108717171212962,
+                placeID: 'ChIJDRRax_WMaw0R6nY68iqgpIo'
+            },
+            {
+                nombre: 'Restaurante Chino Rong Chan',
+                latitud: 38.69050818460953,
+                longitud: -4.107820384708853,
+                placeID: 'ChIJZdVYM_SMaw0RSWLpAC25a_8'
+            },
+            {
+                nombre: 'Comisaría de Policía Nacional',
+                latitud: 38.689478633161755, 
+                longitud: -4.110883890734986,
+                placeID: 'ChIJYf_wZV-Maw0R75HeCnhSrcs'
+            },
+            {
+                nombre: 'Comisaría de Policía Local',
+                latitud: 38.68699913787376,
+                longitud: -4.1109426023821465,
+                placeID: 'ChIJ15pFHr6Naw0RtSbrDo0Bf8Q'
+            },
+            {
+                nombre: 'Guardia Civil',
+                latitud: 38.68066938099906, 
+                longitud: -4.106132675394247,
+                placeID: 'ChIJMT0PBouMaw0RW90Ymyw0KNM'
+            }
+        ];
+
+        function obtenerUbicacion() {
+            const spinner = document.getElementById('spinner');
+            spinner.style.display = 'block';
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        spinner.style.display = 'none';
+                        ordenarUbicacionesPorDistancia(position.coords.latitude, position.coords.longitude);
+                    },
+                    function (error) {
+                        spinner.style.display = 'none';
+                        console.error('Error al obtener la ubicación:', error.message);
+                        // Mostrar la lista ordenada por nombre si hay un error
+                        ordenarUbicacionesPorNombre();
+                    }
+                );
+            } else {
+                spinner.style.display = 'none';
+                console.error('Geolocalización no soportada en este navegador.');
+                // Mostrar la lista ordenada por nombre si no se soporta la geolocalización
+                ordenarUbicacionesPorNombre();
+            }
+        }
+
+        function ordenarUbicacionesPorDistancia(latitudActual, longitudActual) {
+            arrayPuntosVioleta.forEach(function (ubicacion) {
+                ubicacion.distancia = calcularDistancia(latitudActual, longitudActual, ubicacion.latitud, ubicacion.longitud);
+            });
+
+            arrayPuntosVioleta.sort(function (a, b) {
+                return a.distancia - b.distancia;
+            });
+
+            mostrarUbicacionesOrdenadas();
+        }
+
+        function ordenarUbicacionesPorNombre() {
+            arrayPuntosVioleta.sort(function (a, b) {
+                return a.nombre.localeCompare(b.nombre);
+            });
+
+            mostrarUbicacionesOrdenadas();
+        }
+
+        function calcularDistancia(lat1, lon1, lat2, lon2) {
+            const R = 6371;
+            const dLat = degToRad(lat2 - lat1);
+            const dLon = degToRad(lon2 - lon1);
+            const a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(degToRad(lat1)) * Math.cos(degToRad(lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            const distancia = R * c;
+            return distancia;
+        }
+
+        function degToRad(deg) {
+            return deg * (Math.PI / 180);
+        }
+
+        function mostrarUbicacionesOrdenadas() {
+            const listaOrdenada = document.getElementById('ubicacionesOrdenadas');
+            listaOrdenada.innerHTML = '';
+
+            arrayPuntosVioleta.forEach(function (ubicacion) {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${ubicacion.nombre} ${ubicacion.distancia ? ` - Distancia: ${ubicacion.distancia.toFixed(2)} km` : ''}`;
+                listItem.style.cursor = 'pointer';
+
+                listItem.addEventListener('click', function () {
+                    abrirEnGoogleMaps(ubicacion);
+                });
+
+                listaOrdenada.appendChild(listItem);
+            });
+        }
+
+        function abrirEnGoogleMaps(ubicacion) {
+            let url = `https://www.google.com/maps/search/?api=1&query=${ubicacion.latitud}%2C${ubicacion.longitud}&query_place_id=${ubicacion.placeID}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+
+</html>
