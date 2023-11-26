@@ -276,6 +276,7 @@
         .zoom:hover {
             transform: scale(1.5);
             z-index: 999;
+            cursor: pointer;
         }
 
         .pull-to-refresh {
@@ -715,7 +716,7 @@
                 template = `
                 <div class="col-lg-4 col-md-6 col-sm-12 p-2">
                     <div class="card">
-                        <img src="/Sitios/${ubicacion.placeID}.png" class="card-img-top zoom" alt="Foto del mapa de ${ubicacion.nombre}">
+                        <img onclick="window.location.href = 'https://www.google.com/maps/search/?api=1&query=${ubicacion.latitud}%2C${ubicacion.longitud}&query_place_id=${ubicacion.placeID}'" src="/Sitios/${ubicacion.placeID}.png" class="card-img-top zoom" alt="Foto del mapa de ${ubicacion.nombre}">
                         <div class="card-body">
                             <h5 class="card-title">${ubicacion.nombre}</h5>
                             <p class="card-text">
