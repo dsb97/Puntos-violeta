@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-bs-theme="light">
+<html lang="es" data-bs-theme="light">
 
 <head>
 
@@ -9,7 +9,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.118.2">
     <title>Puntos violeta</title>
-    <link rel="icon" type="image/jpg" href="favicon.png"/>
+    <link rel="icon" type="image/jpg" href="favicon.png" />
     <link rel="manifest" href="site.webmanifest" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,6 +17,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap"
         rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
         * {
             font-family: 'Nunito' !important;
@@ -226,6 +227,53 @@
                 transform: rotateY(3600deg);
             }
         }
+
+
+        /**BANNER**/
+
+        #instalarBanner {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            color: black;
+            text-align: center;
+            padding: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /***social buttons***/
+        .social-button {
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Colores personalizados para cada red social */
+        .twitter {
+            background-color: #1DA1F2;
+            color: white;
+        }
+
+        .instagram {
+            background-color: #E4405F;
+            color: white;
+        }
+
+        .facebook {
+            background-color: #1877F2;
+            color: white;
+        }
+
+        .tiktok {
+            background-color: #69C9D0;
+            color: white;
+        }
     </style>
 
 
@@ -258,17 +306,26 @@
         <nav class="fixed-top" style="background-color: rgb(111, 48, 160);">
             <div class="container-fluid">
                 <div class="h-100 d-flex justify-content-around p-3">
-                    <div class="d-flex flex-column align-items-center text-white">
-                        <h1 hidden>PUNTOS VIOLETA</h1>
-                        <h3 class="fw-bold m-0" id="appTitle">¡Bienvenida!</h3>
+                    <h1 hidden>PUNTOS VIOLETA</h1>
+                    <div class="d-flex flex-column align-items-center text-white" id="appTitle">
+                        <h3 class="fw-bold m-0">¡Bienvenida!</h3>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
 
-    <main>
-        <article class="row ps-3 pt-3 pb-5" id="sitiosCerca">
+    <main style="margin-top: calc(1vh + 0.5%);">
+        <article class="row m-0 p-0 py-3" id="instalarBanner">
+            <div class="container">
+                <p class="mb-2">¿Instalar esta web como aplicación en tu teléfono?</p>
+                <button id="instalarBoton" class="btn btn-dark me-2">Instalar</button>
+                <button onclick="cerrarBanner()" class="btn btn-outline-dark">Cerrar</button>
+            </div>
+        </article>
+
+
+        <article class="row m-0 ps-3 pt-3 pb-5" id="sitiosCerca">
             <div class="col-12 p-2 pt-3">
                 <h5 class="m-0 p-0">Puntos cerca de ti:</h4>
             </div>
@@ -281,15 +338,135 @@
             </div>
         </article>
         <article id="mapa" style="display: none;">
-            <iframe style="width: 100vw; height: 100vh"
+            <iframe style="width: 100%;"
                 src="https://www.google.com/maps/d/u/0/embed?mid=1-Ow0uPli5gmeDvw3dQHGc7c9GcIpt8I&ehbc=2E312F&noprof=1"></iframe>
         </article>
-        <article class="row" id="buscar">
-            
+        <!-- <article class="row" id="buscar" style="display: none;">
+
+        </article> -->
+        <article class="row p-4" id="info" style="display: none;">
+            <div class="d-flex justify-content-center align-items-center">
+                <img class="img-fluid" src="favicon.png" height="128" width="128">
+                <h2 class="ms-2 h3 fw-bold">Puntos violeta</h2>
+                <p class="ms-2">Versión 1.0.3</p>
+            </div>
+
+            <div class="accordion mb-5" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            Legal
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p>Nosotros, Juventudes Socialistas de Puertollano (en adelante, JSP), en representación de
+                                la aplicación
+                                web Puntos Violeta (en adelante, la aplicación), declaramos lo siguiente con respecto al
+                                tratamiento de
+                                datos y derechos de propiedad:</p>
+                            <h4>Recopilación y Tratamiento de Datos:</h4>
+                            <p> La aplicación no recopila, envía, recibe ni comercia con datos de carácter personal
+                                ni general. </p>
+                            <p> La solicitud de ubicación se realiza únicamente con el propósito de conocer las
+                                localizaciones más
+                                cercanas y no implica la recopilación o almacenamiento de datos personales. </p>
+                            <h4>Propiedad Intelectual:</h4>
+                            <p> Todos los derechos de propiedad intelectual de la aplicación, incluyendo la
+                                interfaz de usuario y el
+                                código subyacente, pertenecen en su totalidad a sus creadores, en este caso,
+                                JSP.</p>
+                            <h4>Uso no Autorizado:</h4>
+                            <p> Queda estrictamente prohibido el uso no autorizado, reproducción,
+                                distribución o modificación de la
+                                aplicación, ya sea total o parcial, sin el consentimiento expreso por
+                                escrito de JSP o alguno de sus
+                                representantes.</p>
+                            <h4>Responsabilidad:</h4>
+                            <p> Ni JSP ni sus representantes asumen ninguna responsabilidad por el uso
+                                indebido de la aplicación por
+                                parte de terceros.</p>
+                            <p> Al utilizar la aplicación, el usuario acepta y se compromete a cumplir
+                                con los términos y
+                                condiciones establecidos en esta declaración legal.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Más recursos
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body d-flex justify-content-center">
+                            <a href="https://violenciagenero.igualdad.gob.es/informacionUtil/recursos/home.htm">
+                                <img src="MIGU_SEIVG_DGVG.jpg" style="width: 300pt;">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                            Síguenos en redes:
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body" style="background-color: rgb(111, 48, 160);">
+                            <div class="d-flex justify-content-center mb-5">
+                                <img class="rounded" src="/Logo.png" width="200" height="200">
+                            </div>
+                            <div class="d-flex justify-content-around">
+                                <a href="https://twitter.com/JSPuertollano/" class="btn social-button twitter">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-twitter me-2" viewBox="0 0 16 16">
+                                        <path
+                                            d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15" />
+                                    </svg> Twitter
+                                </a>
+
+                                <!-- Instagram -->
+                                <a href="https://www.instagram.com/juventudes_puertollano/" class="btn social-button instagram">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-instagram me-2" viewBox="0 0 16 16">
+                                        <path
+                                            d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
+                                    </svg> Instagram
+                                </a>
+
+                                <!-- Facebook -->
+                                <a href="https://www.facebook.com/JovenesSocialistasdePuertollano" class="btn social-button facebook">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-facebook me-2" viewBox="0 0 16 16">
+                                        <path
+                                            d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
+                                    </svg> Facebook
+                                </a>
+
+                                <!-- TikTok -->
+                                <a href="https://www.tiktok.com/@jsocialistaspuertollano?lang=es" class="btn social-button tiktok">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-tiktok me-2" viewBox="0 0 16 16">
+                                        <path
+                                            d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z" />
+                                    </svg> TikTok
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
         </article>
     </main>
 
-    <aside class="fixed-bottom" style="background-color: rgb(111, 48, 160);">
+    <aside class="fixed-bottom pb-3" style="background-color: rgb(111, 48, 160);">
         <div class="container-fluid">
             <div class="h-100 d-flex justify-content-around p-2">
                 <button id="mapaBoton" onclick="mostrarSeccion('mapa')" class="btn btn-outline-light border-0">
@@ -312,7 +489,7 @@
                         Cerca
                     </div>
                 </button>
-                <button id="buscarBoton" onclick="mostrarSeccion('buscar')" class="btn btn-outline-light border-0">
+                <!-- <button id="buscarBoton" onclick="mostrarSeccion('buscar')" class="btn btn-outline-light border-0">
                     <div class="d-flex flex-column align-items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-search mb-2" viewBox="0 0 16 16">
@@ -321,8 +498,8 @@
                         </svg>
                         Buscar
                     </div>
-                </button>
-                <button class="btn btn-outline-light border-0">
+                </button> -->
+                <button id="infoBoton" onclick="mostrarSeccion('info')" class="btn btn-outline-light border-0">
                     <div class="d-flex flex-column align-items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-search mb-2" viewBox="0 0 16 16">
@@ -335,13 +512,76 @@
             </div>
         </div>
     </aside>
+
+    <div class="modal fade" id="modalInstalar" tabindex="-1" aria-labelledby="modalInstalarLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img src="favicon.png" width="30" height="30">
+                    <h1 class="modal-title fs-5" id="modalInstalarLabel">Instalar</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Deseas instalar la aplicación?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Por ahora no</button>
+                    <button id="botonInstalar" type="button" class="btn btn-primary">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
     <script>
+
+        var messageShown = false;
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (event) => {
+            debugger;
+            if (!messageShown) {
+                event.preventDefault();
+                deferredPrompt = event;
+                document.getElementById('instalarBanner').style.display = 'block';
+                document.getElementById('instalarBanner').style.zIndex = '1100';
+                messageShown = true;
+            }
+        });
+
+        function cerrarBanner() {
+            document.getElementById('instalarBanner').style.display = 'none';
+        }
+
+        document.getElementById('instalarBoton').addEventListener('click', () => {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('Usuario aceptó la instalación');
+                } else {
+                    console.log('Usuario rechazó la instalación');
+                }
+                deferredPrompt = null;
+            });
+            cerrarBanner();
+        });
+
+        var modalInstall;
         window.addEventListener('DOMContentLoaded', function () {
+            //modalInstall = new bootstrap.Modal(document.getElementById('modalInstalar'), {}).show();
             obtenerUbicacion();
+
+            //Tamaños
+            let iF = document.getElementsByTagName('iframe')[0];
+            let tB = window.getComputedStyle(document.getElementsByTagName('nav')[0]).getPropertyValue("height");
+            let bB = window.getComputedStyle(document.getElementsByTagName('aside')[0]).getPropertyValue("height");
+            console.log(`tB: ${tB}, bB: ${bB}`)
+            iF.style.height = `calc(100vh - ${tB} - ${bB})`;
+
+
         });
         let arrayPuntosVioleta = [
             {
@@ -475,9 +715,9 @@
                                     class="bi bi-cursor" viewBox="0 0 16 16">
                                     <path
                                         d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103zM2.25 8.184l3.897 1.67a.5.5 0 0 1 .262.263l1.67 3.897L12.743 3.52z" />
-                                </svg> A ${ubicacion.distancia ? `${(ubicacion.distancia.toFixed(2) < 1 ? ubicacion.distancia.toFixed(2) * 100 + ' m' : ubicacion.distancia.toFixed(2) + ' km')} de distancia` : 'una distancia desconocida. Permite el acceso a la ubicación para saber más.'} 
+                                </svg> A ${ubicacion.distancia ? `${(ubicacion.distancia.toFixed(2) < 1 ? ubicacion.distancia.toFixed(2) * 1000 + ' m' : ubicacion.distancia.toFixed(2) + ' km')} de distancia` : 'una distancia desconocida. Permite el acceso a la ubicación para saber más.'} 
                             </p>
-                            <a role="button" href="https://www.google.com/maps/search/?api=1&query=${ubicacion.latitud}%2C${ubicacion.longitud}&query_place_id=${ubicacion.placeID}" class="btn btn-dark border-0" style="background-color: rgb(111, 48, 160);">Abrir en Google Maps</a>
+                            <a role="button" href="https://www.google.com/maps/search/?api=1&query=${ubicacion.latitud}%2C${ubicacion.longitud}&query_place_id=${ubicacion.placeID}" class="btn btn-lg btn-dark border-0" style="background-color: rgb(111, 48, 160);">Abrir en Google Maps</a>
                         </div>
                     </div>
                 </div>
@@ -501,7 +741,6 @@
             document.getElementById(seccion + 'Boton').classList.add('btn-light');
             document.getElementById(seccion + 'Boton').classList.remove('btn-outline-light');
             document.getElementById(seccion).style.display = null;
-
         }
     </script>
 
