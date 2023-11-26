@@ -245,7 +245,7 @@
         }
 
         /***social buttons***/
-       
+
 
         /* Colores personalizados para cada red social */
         .twitter {
@@ -266,6 +266,15 @@
         .tiktok {
             background-color: #69C9D0;
             color: white;
+        }
+
+        .zoom {
+            transition: transform .2s;
+        }
+
+        .zoom:hover {
+            transform: scale(1.5);
+            z-index: 999;
         }
     </style>
 
@@ -409,7 +418,7 @@
                         </button>
                     </h2>
                     <div id="collapseThree" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                        <div class="accordion-body" >
+                        <div class="accordion-body">
                             <div class="d-flex flex-row justify-content-center mb-5">
                                 <img class="rounded" src="/Logo.png" width="200" height="200">
                             </div>
@@ -423,7 +432,8 @@
                                 </a>
 
                                 <!-- Instagram -->
-                                <a href="https://www.instagram.com/juventudes_puertollano/" class="btn btn-light instagram ms-3">
+                                <a href="https://www.instagram.com/juventudes_puertollano/"
+                                    class="btn btn-light instagram ms-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-instagram me-2" viewBox="0 0 16 16">
                                         <path
@@ -431,11 +441,12 @@
                                     </svg> Instagram
                                 </a>
 
-                                
+
                             </div>
                             <div class="d-flex flex-row justify-content-center mb-2">
                                 <!-- Facebook -->
-                                <a href="https://www.facebook.com/JovenesSocialistasdePuertollano" class="btn btn-light facebook ">
+                                <a href="https://www.facebook.com/JovenesSocialistasdePuertollano"
+                                    class="btn btn-light facebook ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-facebook me-2" viewBox="0 0 16 16">
                                         <path
@@ -444,7 +455,8 @@
                                 </a>
 
                                 <!-- TikTok -->
-                                <a href="https://www.tiktok.com/@jsocialistaspuertollano?lang=es" class="btn btn-light tiktok ms-3">
+                                <a href="https://www.tiktok.com/@jsocialistaspuertollano?lang=es"
+                                    class="btn btn-light tiktok ms-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-tiktok me-2" viewBox="0 0 16 16">
                                         <path
@@ -509,25 +521,6 @@
         </div>
     </aside>
 
-    <div class="modal fade" id="modalInstalar" tabindex="-1" aria-labelledby="modalInstalarLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <img src="favicon.png" width="30" height="30">
-                    <h1 class="modal-title fs-5" id="modalInstalarLabel">Instalar</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>¿Deseas instalar la aplicación?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Por ahora no</button>
-                    <button id="botonInstalar" type="button" class="btn btn-primary">Aceptar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -566,10 +559,7 @@
 
         var modalInstall;
         window.addEventListener('DOMContentLoaded', function () {
-            //modalInstall = new bootstrap.Modal(document.getElementById('modalInstalar'), {}).show();
             obtenerUbicacion();
-
-            //Tamaños
             let iF = document.getElementsByTagName('iframe')[0];
             let tB = window.getComputedStyle(document.getElementsByTagName('nav')[0]).getPropertyValue("height");
             let bB = window.getComputedStyle(document.getElementsByTagName('aside')[0]).getPropertyValue("height");
@@ -578,6 +568,7 @@
 
 
         });
+
         let arrayPuntosVioleta = [
             {
                 nombre: 'Café Macondo',
@@ -702,7 +693,7 @@
                 template = `
                 <div class="col-lg-4 col-md-6 col-sm-12 p-2">
                     <div class="card">
-                        <img src="/Sitios/${ubicacion.placeID}.png" class="card-img-top" alt="Foto del mapa de ${ubicacion.nombre}">
+                        <img src="/Sitios/${ubicacion.placeID}.png" class="card-img-top zoom" alt="Foto del mapa de ${ubicacion.nombre}">
                         <div class="card-body">
                             <h5 class="card-title">${ubicacion.nombre}</h5>
                             <p class="card-text">
@@ -710,9 +701,9 @@
                                     class="bi bi-cursor" viewBox="0 0 16 16">
                                     <path
                                         d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103zM2.25 8.184l3.897 1.67a.5.5 0 0 1 .262.263l1.67 3.897L12.743 3.52z" />
-                                </svg> A ${ubicacion.distancia ? `${(ubicacion.distancia.toFixed(2) < 1 ? ubicacion.distancia.toFixed(2) * 1000 + ' m' : ubicacion.distancia.toFixed(2) + ' km')} de distancia` : 'una distancia desconocida. Permite el acceso a la ubicación para saber más.'} 
+                                </svg> A ${ubicacion.distancia ? `${(ubicacion.distancia < 1 ? (ubicacion.distancia * 1000).toFixed(2) + ' m' : ubicacion.distancia.toFixed(2) + ' km')} de distancia` : 'una distancia desconocida. Permite el acceso a la ubicación para saber más.'} 
                             </p>
-                            <a role="button" href="https://www.google.com/maps/search/?api=1&query=${ubicacion.latitud}%2C${ubicacion.longitud}&query_place_id=${ubicacion.placeID}" class="btn btn-lg btn-dark border-0" style="background-color: rgb(111, 48, 160);">Abrir en Google Maps</a>
+                            <a role="button" href="https://www.google.com/maps/search/?api=1&query=${ubicacion.latitud}%2C${ubicacion.longitud}&query_place_id=${ubicacion.placeID}" class="btn btn-lg btn-dark border-0" style="background-color: rgb(111, 48, 160);">Más detalles...</a>
                         </div>
                     </div>
                 </div>
