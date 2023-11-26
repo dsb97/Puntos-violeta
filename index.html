@@ -245,14 +245,7 @@
         }
 
         /***social buttons***/
-        .social-button {
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-        }
+       
 
         /* Colores personalizados para cada red social */
         .twitter {
@@ -417,11 +410,11 @@
                     </h2>
                     <div id="collapseThree" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                         <div class="accordion-body" >
-                            <div class="d-flex justify-content-center mb-5">
+                            <div class="d-flex flex-row justify-content-center mb-5">
                                 <img class="rounded" src="/Logo.png" width="200" height="200">
                             </div>
-                            <div class="d-flex justify-content-around mb-2">
-                                <a href="https://twitter.com/JSPuertollano/" class="btn social-button twitter">
+                            <div class="d-flex flex-row justify-content-center mb-1">
+                                <a href="https://twitter.com/JSPuertollano/" class="btn btn-light twitter ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-twitter me-2" viewBox="0 0 16 16">
                                         <path
@@ -430,7 +423,7 @@
                                 </a>
 
                                 <!-- Instagram -->
-                                <a href="https://www.instagram.com/juventudes_puertollano/" class="btn social-button instagram">
+                                <a href="https://www.instagram.com/juventudes_puertollano/" class="btn btn-light instagram ms-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-instagram me-2" viewBox="0 0 16 16">
                                         <path
@@ -438,8 +431,11 @@
                                     </svg> Instagram
                                 </a>
 
+                                
+                            </div>
+                            <div class="d-flex flex-row justify-content-center mb-2">
                                 <!-- Facebook -->
-                                <a href="https://www.facebook.com/JovenesSocialistasdePuertollano" class="btn social-button facebook">
+                                <a href="https://www.facebook.com/JovenesSocialistasdePuertollano" class="btn btn-light facebook ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-facebook me-2" viewBox="0 0 16 16">
                                         <path
@@ -448,7 +444,7 @@
                                 </a>
 
                                 <!-- TikTok -->
-                                <a href="https://www.tiktok.com/@jsocialistaspuertollano?lang=es" class="btn social-button tiktok">
+                                <a href="https://www.tiktok.com/@jsocialistaspuertollano?lang=es" class="btn btn-light tiktok ms-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-tiktok me-2" viewBox="0 0 16 16">
                                         <path
@@ -542,7 +538,6 @@
         let deferredPrompt;
 
         window.addEventListener('beforeinstallprompt', (event) => {
-            debugger;
             if (!messageShown) {
                 event.preventDefault();
                 deferredPrompt = event;
