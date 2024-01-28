@@ -562,7 +562,7 @@
                     document.getElementById(ubicacion.placeID).style.display = null;
                 } else {
                     document.getElementById(ubicacion.placeID).style.display = 'none';
-                    if (ubicacion.nombre.startsWith(event.target.value) || ubicacion.nombre.includes(event.target.value)) {
+                    if (ubicacion.nombre.toLowerCase().startsWith(event.target.value.toLowerCase()) || ubicacion.nombre.toLowerCase().includes(event.target.value.toLowerCase())) {
                         document.getElementById(ubicacion.placeID).style.display = null;
                     }
                 }
