@@ -331,22 +331,35 @@
         </article>
 
 
-        <article class="row m-0 ps-3 pt-3 pb-5" id="sitiosCerca">
+        <article class="row m-0 px-2 pt-3 pb-5" id="sitiosCerca">
             <div class="col-12 p-2 pt-3">
                 <h4 class="m-0 p-0 fw-bold">Sitios cerca de ti:</h4>
             </div>
-            <div class="row">
-                <input id="inputSitiosCerca" list="itemsSitiosCerca" class="form-control" placeholder="Buscar por nombre...">
+            <div class="col-12 p-2 pt-3">
+                <div class="input-group">
+                    <input id="inputSitiosCerca" list="itemsSitiosCerca" class="form-control"
+                        placeholder="Buscar sitios por nombre..." aria-label="Buscar por nombre..."
+                        aria-describedby="basic-addon2">
+                    <span class="input-group-text" id="basic-addon2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+                    </span>
+                </div>
                 <datalist id="itemsSitiosCerca">
                 </datalist>
             </div>
+
             <div class="row" id="cardsSitiosCerca">
-                <div class="col-12 d-flex justify-content-center" id="spinner">
+                <div class="d-flex justify-content-center" id="spinner">
                     <div class="lds-circle">
                         <div></div>
                     </div>
                 </div>
             </div>
+
 
         </article>
         <article id="mapa" style="display: none;">
@@ -360,7 +373,7 @@
             <div class="d-flex justify-content-center align-items-center">
                 <img class="img-fluid" src="favicon.png" height="128" width="128">
                 <h2 class="ms-2 h3 fw-bold">Puntos violeta</h2>
-                <p class="ms-2">Versión 1.0.3</p>
+                <p class="ms-2">Versión 1.1.0</p>
             </div>
 
             <div class="accordion mb-5" id="accordionExample">
@@ -537,6 +550,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
 
     <script>
         inputSitiosCerca.addEventListener('input', function (event) {
@@ -621,14 +635,14 @@
                 latitud: 38.68761839415915,
                 longitud: -4.111456155876317,
                 placeID: 'ChIJVzZ8lF-Maw0RBfd4UEC063Y',
-                direccion: 'C. Torrecilla, 17, '
+                direccion: 'C. Torrecilla, 17'
             },
             {
                 nombre: 'Díaz Floristas Estrella',
                 latitud: 38.68708676870443,
                 longitud: -4.109657827032374,
                 placeID: 'ChIJGw4xQ_WMaw0RHCy6WS26NBM',
-                direccion: 'C. Aduana, 7, '
+                direccion: 'C. Aduana, 7'
             },
             {
                 nombre: 'Multicines Ortega',
@@ -763,7 +777,7 @@
 
             arrayPuntosVioleta.forEach(function (ubicacion) {
                 template = `
-                <div id="${ubicacion.placeID}" class="col-lg-4 col-md-6 col-sm-12 p-2">
+                <div id="${ubicacion.placeID}" class="col-lg-4 col-md-6 col-sm-12 mb-3">
                     <div class="card">
                         <div id="map${ubicacion.placeID}" style="height: 200px;"></div>
                         <div class="card-body">
@@ -780,7 +794,18 @@
                                 </svg>
                                 ${ubicacion.direccion}
                             </p>
-                            <a role="button" href="https://www.google.com/maps/search/?api=1&query=${ubicacion.latitud}%2C${ubicacion.longitud}&query_place_id=${ubicacion.placeID}" class="btn btn-lg btn-dark border-0" style="background-color: rgb(111, 48, 160);">Más detalles...</a>
+                            <a role="button" href="https://www.google.com/maps/search/?api=1&query=${ubicacion.latitud}%2C${ubicacion.longitud}&query_place_id=${ubicacion.placeID}" class="btn btn-dark border-0" style="background-color: rgb(111, 48, 160);">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                                </svg>
+                                Más detalles...</a>
+                            <a role="button" href="https://www.google.com/maps/dir/?api=1&origin=${currentPosition.coords.latitude},${currentPosition.coords.longitude}&destination=${ubicacion.latitud},${ubicacion.longitud}" class="btn btn-dark border-0" style="background-color: rgb(111, 48, 160);">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sign-turn-right" viewBox="0 0 16 16">
+                                    <path d="M5 8.5A2.5 2.5 0 0 1 7.5 6H9V4.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L9.41 8.658A.25.25 0 0 1 9 8.466V7H7.5A1.5 1.5 0 0 0 6 8.5V11H5z"/>
+                                    <path fill-rule="evenodd" d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.48 1.48 0 0 1 0-2.098zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134Z"/>
+                                </svg>
+                                Ruta</a>
                         </div>
                     </div>
                 </div>
@@ -803,7 +828,13 @@
                 }
 
                 obtenerPrevisualizacionMapa(`map${ubicacion.placeID}`, ubicacionOrigen, ubicacionDestino);
-            })
+            });
+
+            let instrucciones = document.querySelectorAll('.leaflet-top.leaflet-right');
+            for (let index = 0; index < instrucciones.length; index++) {
+                const element = instrucciones[index];
+                element.style.display = 'none';
+            }
         }
 
         function obtenerPrevisualizacionMapa(mapName, ubicacionOrigen, ubicacionDestino) {
@@ -823,18 +854,19 @@
                 attribution: '&copy; OpenStreetMap contributors'
             }).addTo(map);
 
-            var originMarker = L.marker([ubicacionOrigen.latitud, ubicacionOrigen.longitud]).addTo(map);
-            var destinationMarker = L.marker([ubicacionDestino.latitud, ubicacionDestino.longitud]).addTo(map);
+            var control = L.Routing.control({
+                waypoints: [
+                    L.latLng(ubicacionOrigen.latitud, ubicacionOrigen.longitud),
+                    L.latLng(ubicacionDestino.latitud, ubicacionDestino.longitud)
+                ],
+                routeWhileDragging: false,
+                instructions: ''
+            }).addTo(map);
 
-            var latLngs = [
-                [ubicacionOrigen.latitud, ubicacionOrigen.longitud],
-                [ubicacionDestino.latitud, ubicacionDestino.longitud]
-            ];
-
-            var polyline = L.polyline(latLngs, { color: 'blue' }).addTo(map);
-
-            // Ajustar la vista del mapa para que muestre todos los marcadores y la línea.
-            map.fitBounds(polyline.getBounds());
+            map.on('routesfound', function (e) {
+                var bounds = e.routes[0].bounds;
+                map.fitBounds(bounds);
+            });
         }
 
         function mostrarSeccion(seccion) {
